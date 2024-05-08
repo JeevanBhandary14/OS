@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<stdbool.h>
+
+void main(){
+
+    int n,maxFrames,fault=0,index=0;
+    bool flag;
+
+    printf("enter the number of pages : ");
+    scanf("%d",&n);
+
+    int pages[n];
+    printf("Enter the pages : \n");
+    for(int i=0;i<n;i++)
+        scanf("%d",&pages[i]);
+
+    printf("Enter the number of frames : ");
+    scanf("%d",&maxFrames);
+
+    int frames[maxFrames];
+    for(int i=0;i<maxFrames;i++)
+        frames[i]=-1;
+
+    for(int i=0;i<n;i++){
+        flag=false;
+        printf("Page %d, Memory : ",pages[i]);
+        for(int j=0;j<maxFrames;j++){
+            if(frames[j]==pages[i]){
+                flag=true;
+            }
+        }
+        if(!flag){
+            fault++;
+            frames[index]=pages[i];
+            index=(index+1)%maxFrames;
+        }
+        for(int j=0;j<maxFrames;j++){
+            printf("%d ",frames[j]);
+        }
+        printf("\n");
+    }
+    printf("Faults : %d",fault);
+}
